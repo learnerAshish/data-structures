@@ -106,15 +106,26 @@ struct node *delete_random(struct node *head)
     int position;
     printf("enter element which you want to delete: ");
     scanf("%d",&position);
+    if(head==NULL)
+        return NULL;
     struct node *temp=head;
-    while(temp->next->data!=position)
+    if(temp->data==position)
     {
-        temp=temp->next;
+        head=head->next;
+        free(temp);
+        return head;
     }
-    struct node *a=(struct node*)malloc(sizeof(struct node));
-    a=temp->next;
-    temp->next=temp->next->next;
-    free(a);
+    else
+    {
+        while(temp->next->data!=position)
+        {
+            temp=temp->next;
+        }
+        struct node *a=(struct node*)malloc(sizeof(struct node));
+        a=temp->next;
+        temp->next=temp->next->next;
+        free(a);
+    }
     return head;
 }
 
