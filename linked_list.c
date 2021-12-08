@@ -9,12 +9,26 @@ struct node{
 struct node *insert_first(struct node *head)
 {
     struct node *new_node=(struct node*)malloc(sizeof(struct node));
+    struct node *temp;
     int data;
     printf("enter data: ");
     scanf("%d",&data);
     new_node->data=data;
-    new_node->next=head;
-    head=new_node;
+    if(head==NULL)
+    {
+        new_node->next=NULL;
+        head=new_node;
+    }
+    else
+    {
+        temp=head;
+        while(temp->next!=NULL)
+        {
+            temp=temp->next;
+        }
+        temp->next=new_node;
+        new_node->next=NULL;
+    }
     return head;
 }
 
